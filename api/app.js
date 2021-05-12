@@ -1,11 +1,12 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-
+const cors = require('cors')
 const app  = express();
 
 app.use(express.json());
 app.use(express.urlencoded());
+app.use(cors())
 
 const uri = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@initial.7cbb9.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
