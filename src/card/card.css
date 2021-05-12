@@ -67,8 +67,22 @@ body{
     margin:1.5rem;
     padding: 3px;
     font-size: 1.25rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 
-.newItem:hover{
+.btn2{
+    background-color:#faf3f3 ;
+    border:0.1rem solid #da7f8f;
+    outline: none;
+    color:black;
+    padding:2px;
+    box-sizing: border-box;
+    font-size: 1.2rem;
+}
+
+.btn2:hover{
     box-shadow: 0.4rem 0.4rem 10px 1px #a7bbc7; 
+    cursor: pointer;
 }

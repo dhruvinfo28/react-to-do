@@ -6,6 +6,7 @@ const Card = () => {
     const [items, setItems] = useState([]);
     const [item, setItem] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [isError,setIsError] = useState(false);
 
     const submitHandler = (e) => {
         e.preventDefault();
@@ -27,10 +28,18 @@ const Card = () => {
                     setItem('');
                 })
                 .catch(err => {
-                    console.log(err)
+                    setIsError(true);
                 })
         }
         setItem('');
+    }
+    
+    const deleteItem = (e,_id)=>{
+        // console.log(_id)
+        setItems((items)=>{
+            return items.filter(item=> item._id!=_id)
+        })
+        fetch(url+`/${_id}`,{method:'DELETE'});
     }
 
     useEffect(() => {
@@ -47,10 +56,15 @@ const Card = () => {
                 setIsLoading(false);
             })
             .catch(err => {
-                console.log(err)
+                setIsError(true);
             })
     }, [])
 
+    if(isError){
+        return <>
+            Please Refresh
+        </>;
+    }
     return <>
         <section className="container">
             <div className="todo">
@@ -70,6 +84,7 @@ const Card = () => {
                             const { _id, item } = _item
                             return <div key={_id} className="newItem">
                                 {item}
+                                <button className='btn2' onClick={(e)=>{deleteItem(e,_id)}}> Delete </button>
                             </div>;
                         })
                     }
