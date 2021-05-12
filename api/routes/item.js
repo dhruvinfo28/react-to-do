@@ -10,13 +10,7 @@ const router = express.Router();
 router.get('/',(req,res)=>{
     Item.find({})
         .then((items)=>{
-            if(items.length>0)
                 res.status(200).json(items)
-            else{
-                res.status(404).json({
-                    error: 'No items found'
-                })
-            }
         })
         .catch(err=>{
             res.status(500).send(err);
@@ -77,6 +71,21 @@ router.delete('/:id',(req,res)=>{
         })
         .catch(err=>{
             res.status(500).json(err);
+        })
+})
+
+//Delete all
+router.delete('/',(req,res)=>{
+    Item.remove({})
+        .then(response=>{
+            res.status(400).json({
+                message: 'Successfully deleted'
+            })
+        })
+        .catch(err=>{
+            res.status(500).json({
+                error: err
+            })
         })
 })
 
